@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/willmowlam/nebulus-readme-generator/issues"
   },
-  "homepage": "https://github.com/willmowlam/nebulus-readme-generator#readme"
+  "homepage": "https://github.com/willmowlam/nebulus-readme-generator#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.6",
+    "util": "^0.12.5"
+  }
 }
