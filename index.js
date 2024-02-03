@@ -2,6 +2,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const util = require('util');
+const license = require('license');
 
 // Promisify fs.writeFile() to use promises
 const writeFileAsync = util.promisify(fs.writeFile);
