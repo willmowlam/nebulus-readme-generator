@@ -45,7 +45,7 @@ const promptUser = () =>
     {
       type: 'input',
       name: 'screenshotUrl',
-      message: 'Provide a link to a Screenshot or Video of the application (optional)',
+      message: 'Provide a link to a Screenshot of the application (optional)',
     },
 
     {
