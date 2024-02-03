@@ -6,6 +6,9 @@ const util = require('util');
 // Promisify fs.writeFile() to use promises
 const writeFileAsync = util.promisify(fs.writeFile);
 
+// The target filename
+const targetFile = "output/README.md";
+
 // Function for prompting user for contents of README
 const promptUser = () =>
   inquirer.prompt([
@@ -145,10 +148,10 @@ const generateMarkdown = data => {
 promptUser()
   
    // Write markdown file from answers
-  .then((answers) => writeFileAsync('output/README.md', generateMarkdown(answers)))
+  .then((answers) => writeFileAsync(targetFile, generateMarkdown(answers)))
 
   // Log success
-  .then(() => console.log('Successfully wrote to output/README.md'))
+  .then(() => console.log(`Successfully wrote to ${targetFile}`))
 
   // Catch errors and write to console
   .catch((err)=> console.error(err));
