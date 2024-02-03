@@ -102,12 +102,26 @@ const promptUser = () =>
 
       // MIT, GNU, Creative Commons, Apache 2.0, BSD-2-Clause
       {
-        type: 'input',
+        type: 'list',
         name: 'license',
         message: 'What is the project License?',
+        choices: [
+          {
+            name: '1) MIT License\nPermission for commercial/private use, distribution and modification. Must have License and Copyright notices. Limited liability and no warranty.',
+            value: '[MIT License](https://spdx.org/licenses/MIT.html)',
+          },
+          {
+            name: '2) Apache-2.0 License\nAs MIT, but allows patent use and requires documentation of changes. No trademark use without explicit permission.',
+            value: '[Apache-2.0 License](http://www.apache.org/licenses/)',
+          },
+          {
+            name: '3) GNU General Public License v3.0\nAs MIT and Apache but derivative works must also be distributed under the same license and source code made available. No explicit trademark limitation.',
+            value: '[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0)',
+          },
+        ]
       },
 
-/*    
+/*
       MIT License
       Permission for commercial/private use, distribution and modification. Must have License and Copyright notices. Limited liability and no warranty.
 
@@ -188,7 +202,7 @@ ${answers.questions}
 
 ## License
 
-${answers.license}
+This project is licensed under the ${answers.license}.
 
 `;
 
