@@ -29,7 +29,7 @@ const promptUser = () =>
 
     {
       type: 'input',
-      name: 'instructions',
+      name: 'installation',
       message: 'What are the Installation instructions?',
     },
 
@@ -122,18 +122,17 @@ const promptUser = () =>
 
 
 // Function to generate markdown
-const generateMarkdown = data => {
-   return 
+const generateMarkdown = (answers) => 
 `
 [badges]
 
-## ${data.title}
+# ${answers.title}
 
-# Description
+## Description
 
-${data.description}
+${answers.description}
 
-# Table of Contents
+## Table of Contents
 
 1. [Installation](#installation)
 2. [Usage](#usage)
@@ -150,48 +149,48 @@ ${data.description}
 
 To install necessary dependencies, run the following command in your terminal:
 \`\`\`
-${data.install}
+${answers.installation}
 \`\`\`
 
 ## Usage Information
 
-${data.usage}
+${answers.usage}
 
 ## Demo
 
 Use the following link to view a live demo of this application: 
 
-[Live Demo](${data.demo})
+[Live Demo](${answers.liveUrl})
 
 ## Screenshot
 
-![Screenshot of Application](${data.img})
+![Screenshot of Application](${answers.screenshotUrl})
 
 ## Credits
 
-This project was developed by ${data.credits}.
+This project was developed by ${answers.credits}.
 
 ## Features
 
-${data.features}
+${answers.features}
 
 ## Contribution
 
-${data.contribution}
+${answers.contribution}
 
 ## Tests
 
-${data.tests}
+${answers.tests}
 
 ## Questions
 
-${data.questions}
+${answers.questions}
 
 ## License
 
-${data.license}
+${answers.license}
 
-`};
+`;
 
     // Badges (optional)
     // Title
