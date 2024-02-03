@@ -39,7 +39,7 @@ const promptUser = () =>
     {
       type: 'input',
       name: 'liveUrl',
-      message: 'What is the URL of the live application?',
+      message: 'What is the URL of the live application (optional)?',
     },
 
     {
@@ -66,7 +66,7 @@ const promptUser = () =>
       {
         type: 'input',
         name: 'contribution',
-        message: 'Please provide Contribution guidelines.',
+        message: 'Please provide Contribution guidelines (optional).',
       },
 
     // Do you have any tests included with your application? 
@@ -74,7 +74,7 @@ const promptUser = () =>
       {
         type: 'input',
         name: 'tests',
-        message: 'Enter the commands users need to run the Tests.',
+        message: 'Enter the commands users need to run the Tests (optional).',
       },
 
     {
@@ -94,7 +94,7 @@ const promptUser = () =>
       {
         type: 'input',
         name: 'badges',
-        message: 'What badges would you like to the top of the README?',
+        message: 'What badges would you like to the top of the README (optional)?',
       },
 
       // MIT, GNU, Creative Commons, Apache 2.0, BSD-2-Clause
@@ -115,10 +115,16 @@ const promptUser = () =>
       As MIT and Apache but derivative works must also be distributed under the same license and source code is available. No explicit trademark limitation.
 */
 
-    ])
+    ]);
 
 
 // Function to generate markdown
+const generateMarkdown = data => {
+   return `
+   
+    ## ${data.title}
+   
+   `};
 
     // Badges (optional)
     // Title
