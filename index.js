@@ -142,3 +142,13 @@ const generateMarkdown = data => {
     // License
 
 // Call the prompt function to gather user input and create markdown README file using promisify to asynchronously write the file. Log any errors.
+promptUser()
+  
+   // Write markdown file from answers
+  .then((answers) => writeFileAsync('output/README.md', generateMarkdown(answers)))
+
+  // Log success
+  .then(() => console.log('Successfully wrote to output/README.md'))
+
+  // Catch errors and write to console
+  .catch((err)=> console.error(err));
