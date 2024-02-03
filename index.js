@@ -123,11 +123,75 @@ const promptUser = () =>
 
 // Function to generate markdown
 const generateMarkdown = data => {
-   return `
-   
-    ## ${data.title}
-   
-   `};
+   return 
+`
+[badges]
+
+## ${data.title}
+
+# Description
+
+${data.description}
+
+# Table of Contents
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Demo URL](#demo)
+4. [Screenshot](#screenshot)
+5. [Credits](#credits)
+6. [Features](#features)
+7. [How to Contribute](#contribution)
+8. [Tests](#tests)
+9. [Questions](#questions)
+10. [License](#license)
+
+## Installation Instructions
+
+To install necessary dependencies, run the following command in your terminal:
+\`\`\`
+${data.install}
+\`\`\`
+
+## Usage Information
+
+${data.usage}
+
+## Demo
+
+Use the following link to view a live demo of this application: 
+
+[Live Demo](${data.demo})
+
+## Screenshot
+
+![Screenshot of Application](${data.img})
+
+## Credits
+
+This project was developed by ${data.credits}.
+
+## Features
+
+${data.features}
+
+## Contribution
+
+${data.contribution}
+
+## Tests
+
+${data.tests}
+
+## Questions
+
+${data.questions}
+
+## License
+
+${data.license}
+
+`};
 
     // Badges (optional)
     // Title
