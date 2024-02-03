@@ -112,7 +112,7 @@ const promptUser = () =>
       As MIT, but allows patent use and requires documentation of changes. No trademark use without explicit permission.
 
       GNU GPLv3
-      As MIT and Apache but derivative works must also be distributed under the same license and source code is available. No explicit trademark limitation.
+      As MIT and Apache but derivative works must also be distributed under the same license and source code made available. No explicit trademark limitation.
 */
 
     ]);
