@@ -2,6 +2,7 @@
 /*
   Questions
   Validation
+  Remove table of contents for optional sections
   Video
 */
 
@@ -26,13 +27,13 @@ const targetLicenseFile = "./output/LICENSE";
 const promptUser = () =>
   inquirer.prompt([
 
-  {
-    type: 'input',
-    name: 'githubURL',
-    message: 'What is your project GitHub URL?',
-    validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-    // Validate this repo exists
-  },
+    {
+      type: 'input',
+      name: 'githubURL',
+      message: 'What is your project GitHub URL?',
+      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      // Validate this repo exists
+    },
 
     {
       type: 'input',
