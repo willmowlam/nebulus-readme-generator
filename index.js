@@ -293,7 +293,7 @@ const getLicenseText = (answers, template) => {
   return answers;
 }
 
-// Call the prompt function to gather user input, format then asynchronously write  markdown README and LICENSE files using promisify.
+// Call the prompt function to gather user input, format then asynchronously write the README and LICENSE files using promisify.
 promptUser()
 
   // Get license template
