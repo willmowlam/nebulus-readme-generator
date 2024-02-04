@@ -9,8 +9,11 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // Promisify fs.readFile() to use promises
 const readFileAsync = util.promisify(fs.readFile);
 
-// The target readme filename
+// Target readme file
 const targetReadmeFile = "./output/README.md";
+
+// Target LICENSE file
+const targetLicenseFile = "./output/LICENSE";
 
 // Function for prompting user for contents of README
 const promptUser = () =>
@@ -324,16 +327,21 @@ promptUser()
   
   // Format other fields
   .then((answers) => {    
+
     // Get gitHubSlug from provided url
     answers.githubSlug = getGitHubSlug(answers.githubURL);
     return answers;
   })
 
-  // Write markdown file from answers
-  .then((answers) => writeFileAsync(targetReadmeFile, generateMarkdown(answers)))
+  // Write README and LICENSE files
+  .then(async (answers) => {
 
-  // Log success
-  .then(() => console.log(`Successfully wrote to ${targetReadmeFile}`))
+    await writeFileAsync(targetLicenseFile, answers.licenseText);
+    console.log(`Successfully wrote to ${targetLicenseFile}`);
+
+    await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
+    console.log(`Successfully wrote to ${targetReadmeFile}`)
+  })
 
   // Catch errors and write to console
   .catch((err)=> console.error(err));
