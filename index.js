@@ -1,6 +1,6 @@
 // TODO
 /*
-  Questions
+  Questions (email)
   Validation
   Remove table of contents for optional sections
   Video
@@ -67,14 +67,14 @@ const promptUser = () =>
       type: 'input',
       name: 'liveUrl',
       message: 'What is the URL of the live application (optional)?',
-      // Validate this does not 404
+      // Validate, if provided this does not 404
     },
 
     {
       type: 'input',
       name: 'screenshotUrl',
       message: 'Provide the local path or URL to a Screenshot of the application (optional)',
-      // Validate the screenshot file exists?
+      // Validate, if provided the screenshot file exists?
     },
 
     {
@@ -220,8 +220,21 @@ const getGitHubSlug = (url) => {
   // Split the path array
   const pathArray = path.split("/");
 
-  // Return the username and project slug as an object
+  // Return the username and project slug
   return `${pathArray[0]}/${pathArray[1]}`;
+
+};
+
+const getGitHubUsername = (url) => {
+
+  // Remove the domain part 
+  const path = url.replace("https://github.com/", "");
+
+  // Split the path array
+  const pathArray = path.split("/");
+
+  // Return the username
+  return `${pathArray[0]}`;
 
 };
 
