@@ -32,7 +32,6 @@ const promptUser = () =>
     message: 'What is your project GitHub URL?',
     validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
     // Validate this repo exists
-    default: 'https://github.com/facebook/react'
   },
 
     {
@@ -40,7 +39,6 @@ const promptUser = () =>
       name: 'title',
       message: 'What is your project Title?',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'Project Title'
     },
 
     {
@@ -48,7 +46,6 @@ const promptUser = () =>
       name: 'description',
       message: 'Provide a short Description explaining the project; eg what was the motivation, what problem does it solve?',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'This project is designed to...'
     },
 
     {
@@ -56,7 +53,6 @@ const promptUser = () =>
       name: 'installation',
       message: 'What are the Installation instructions?',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'git clone ...'
     },
 
     {
@@ -64,7 +60,6 @@ const promptUser = () =>
       name: 'usage',
       message: 'What are the Usage instructions?',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'open terminal, run node index.js'
     },
 
     {
@@ -72,7 +67,6 @@ const promptUser = () =>
       name: 'liveUrl',
       message: 'What is the URL of the live application (optional)?',
       // Validate this does not 404
-      default: 'https://www.example.com'
     },
 
     {
@@ -80,35 +74,30 @@ const promptUser = () =>
       name: 'screenshotUrl',
       message: 'Provide the local path or URL to a Screenshot of the application (optional)',
       // Validate the screenshot file exists?
-      default: './assets/images/screenshot.jpg'
     },
 
     {
       type: 'input',
       name: 'credits',
       message: 'Enter any Credits (optional).',
-      default: 'J Bloggs, A Nother'
     },
     
     {
       type: 'input',
       name: 'features',
       message: 'Enter the project Features (optional).',
-      default: 'This app has features X and Y.'
     },    
 
     {
       type: 'input',
       name: 'contribution',
       message: 'Please provide Contribution guidelines (optional).',
-      default: 'Feel free to contribute to the project by submitting a pull request.'
     },
 
     {
       type: 'input',
       name: 'tests',
       message: 'Enter the commands users need to run the Tests (optional).',
-      default: 'node test.js'
     },
 
     {
@@ -117,7 +106,6 @@ const promptUser = () =>
       message: 'For the Questions section, enter your email address.',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
       // Validate is an email address
-      default: 'me@example.com'
     },
 
     {
@@ -139,7 +127,6 @@ const promptUser = () =>
         },
       ],
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'MIT'
     },
 
     {
@@ -147,7 +134,6 @@ const promptUser = () =>
       name: 'legalName',
       message: 'What is your Legal Name, to be shown on the License?',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-    //  default: 'Joe Bloggs'
     },
 
   ]);
