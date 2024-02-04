@@ -19,8 +19,6 @@ const targetLicenseFile = "./output/LICENSE";
 const promptUser = () =>
   inquirer.prompt([
 
-  // Define questions
-
   {
     type: 'input',
     name: 'githubURL',
@@ -164,7 +162,7 @@ ${answers.description}
 
 1. [Installation](#installation)
 2. [Usage](#usage)
-3. [Demo URL](#demo)
+3. [Demo](#demo)
 4. [Screenshot](#screenshot)
 5. [Credits](#credits)
 6. [Features](#features)
@@ -173,14 +171,14 @@ ${answers.description}
 9. [Questions](#questions)
 10. [License](#license)
 
-## Installation Instructions
+## Installation
 
-To install necessary dependencies, run the following command in your terminal:
+To install necessary dependencies, run the following command(s) in your terminal:
 \`\`\`jsx
 ${answers.installation}
 \`\`\`
 
-## Usage Information
+## Usage
 
 ${answers.usage}
 
@@ -219,22 +217,6 @@ ${answers.questions}
 ${answers.title} is [${answers.license} licensed](./LICENSE).
 
 `;
-
-    // Badges (optional)
-    // Title
-    // Description
-    // Table of Contents (auto generated)
-    // Installation
-    // Usage
-    // Demo URL (optional)
-    // Screenshot (optional)
-    // Credits (optional)
-    // Features (optional)
-    // How to Contribute (optional)
-    // Tests (optional)
-    // Questions
-    // License
-
 
 const getGitHubSlug = (url) => {
 
@@ -304,7 +286,7 @@ const getLicenseText = (answers, template) => {
   return answers;
 }
 
-// Call the prompt function to gather user input and create markdown README file using promisify to asynchronously write the file. Log any errors.
+// Call the prompt function to gather user input, format then asynchronously write  markdown README and LICENSE files using promisify.
 promptUser()
 
   // Get license template
