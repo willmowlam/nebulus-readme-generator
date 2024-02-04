@@ -148,16 +148,14 @@ const promptUser = () =>
 
 // Function to generate markdown
 const generateMarkdown = (answers) => 
-`
-# ${answers.title}
-
-[![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
+`[![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
 [![Languages](https://img.shields.io/github/languages/count/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
-[![License](https://img.shields.io/github/license/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
-[![GitHub stars](https://img.shields.io/github/stars/${answers.githubSlug}.svg?style=social&label=Stars)](https://github.com/${answers.githubSlug})
-[![GitHub forks](https://img.shields.io/github/forks/${answers.githubSlug}.svg?style=social&label=Forks)](https://github.com/${answers.githubSlug})
-[![GitHub issues](https://img.shields.io/github/issues/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/pulls)
+[![Issues](https://img.shields.io/github/issues/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/pulls)
+[![Stars](https://img.shields.io/github/stars/${answers.githubSlug}.svg?style=social&label=Stars)](https://github.com/${answers.githubSlug})
+[![Forks](https://img.shields.io/github/forks/${answers.githubSlug}.svg?style=social&label=Forks)](https://github.com/${answers.githubSlug})
+
+# ${answers.title}
 
 ## Description
 
@@ -219,11 +217,7 @@ ${answers.questions}
 
 ## License
 
-![GitHub License](https://img.shields.io/github/license/:user/:repo)
-
 ${answers.title} is [${answers.license} licensed](./LICENSE).
-
-${answers.licenseText}
 
 `;
 
@@ -340,7 +334,7 @@ promptUser()
     console.log(`Successfully wrote to ${targetLicenseFile}`);
 
     await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
-    console.log(`Successfully wrote to ${targetReadmeFile}`)
+    console.log(`Successfully wrote to ${targetReadmeFile}`);
   })
 
   // Catch errors and write to console
