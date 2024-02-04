@@ -25,7 +25,6 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "inquirer": "^8.2.6",
-    "license": "^1.0.3",
     "util": "^0.12.5"
   }
 }
