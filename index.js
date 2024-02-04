@@ -1,3 +1,10 @@
+// TODO
+/*
+  Questions
+  Validation
+  Video
+*/
+
 // Import required modules (fs, inquirer, util)
 const fs = require('fs');
 const inquirer = require('inquirer');
