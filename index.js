@@ -23,6 +23,9 @@ const targetReadmeFile = "./output/README.md";
 // Target LICENSE file
 const targetLicenseFile = "./output/LICENSE";
 
+// Get the current year
+const currentYear = new Date().getFullYear();
+
 // Function for prompting user for contents of README
 const promptUser = () =>
   inquirer.prompt([
@@ -208,6 +211,8 @@ ${answers.questions}
 
 ## License
 
+Copyright (c) ${currentYear} ${answers.legalName}
+
 ${answers.title} is [${answers.license} licensed](./LICENSE).
 
 `;
@@ -238,7 +243,6 @@ const getGitHubUsername = (url) => {
 
 };
 
-
 // Translate the tokens in the license template
 const getLicenseText = (answers, template) => {
 
@@ -249,9 +253,6 @@ const getLicenseText = (answers, template) => {
   if (typeof licenseText !== 'string' || licenseText.length === 0) {
       throw new Error('Failed to retrieve license text');
   }
-
-  // Change any <year> to current year
-  const currentYear = new Date().getFullYear();
 
   switch (answers.license){
     case "MIT":
