@@ -18,6 +18,14 @@ const promptUser = () =>
 
   // Define questions
 
+  {
+    type: 'input',
+    name: 'githubURL',
+    message: 'What is your project GitHub URL?',
+    validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+    default: 'https://github.com/facebook/react'
+  },
+
     {
       type: 'input',
       name: 'title',
@@ -96,25 +104,10 @@ const promptUser = () =>
 
     {
       type: 'input',
-      name: 'githubUsername',
-      message: 'For the Questions section, enter your GitHub username.',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      default: 'myGitHubUsername'
-    },
-
-    {
-      type: 'input',
       name: 'emailAddress',
       message: 'For the Questions section, enter your email address.',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
       default: 'me@example.com'
-    },
-
-    {
-      type: 'input',
-      name: 'badges',
-      message: 'What badges would you like to the top of the README (optional)?',
-      default: '![nutriSmartApp](https://img.shields.io/github/languages/top/willmowlam/nutriSmartApp)'
     },
 
     {
@@ -153,9 +146,15 @@ const promptUser = () =>
 // Function to generate markdown
 const generateMarkdown = (answers) => 
 `
-${answers.badges}
-
 # ${answers.title}
+
+[![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
+[![Languages](https://img.shields.io/github/languages/count/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
+[![License](https://img.shields.io/github/license/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug})
+[![GitHub stars](https://img.shields.io/github/stars/${answers.githubSlug}.svg?style=social&label=Stars)](https://github.com/${answers.githubSlug})
+[![GitHub forks](https://img.shields.io/github/forks/${answers.githubSlug}.svg?style=social&label=Forks)](https://github.com/${answers.githubSlug})
+[![GitHub issues](https://img.shields.io/github/issues/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/${answers.githubSlug}.svg)](https://github.com/${answers.githubSlug}/pulls)
 
 ## Description
 
@@ -219,6 +218,8 @@ ${answers.questions}
 
 ![GitHub License](https://img.shields.io/github/license/:user/:repo)
 
+${answers.title} is [${answers.license} licensed](./LICENSE).
+
 ${answers.licenseText}
 
 `;
@@ -237,6 +238,20 @@ ${answers.licenseText}
     // Tests (optional)
     // Questions
     // License
+
+
+const getGitHubSlug = (url) => {
+
+  // Remove the domain part 
+  const path = url.replace("https://github.com/", "");
+
+  // Split the path array
+  const pathArray = path.split("/");
+
+  // Return the username and project slug as an object
+  return `${pathArray[0]}/${pathArray[1]}`;
+
+};
 
 
 // Translate the tokens in the license template
@@ -298,19 +313,22 @@ promptUser()
 
   // Get license template
   .then(async (answers) => {
-
     const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
     return {answers, licenseTemplate};
-
   })
   
   // Get the license
-  .then(( {answers, licenseTemplate} ) => {   
-
+  .then(( {answers, licenseTemplate} ) => {
     return getLicenseText(answers, licenseTemplate);
-
   })
   
+  // Format other fields
+  .then((answers) => {    
+    // Get gitHubSlug from provided url
+    answers.githubSlug = getGitHubSlug(answers.githubURL);
+    return answers;
+  })
+
   // Write markdown file from answers
   .then((answers) => writeFileAsync(targetReadmeFile, generateMarkdown(answers)))
 
