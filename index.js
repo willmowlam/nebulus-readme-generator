@@ -26,6 +26,7 @@ const promptUser = () =>
     name: 'githubURL',
     message: 'What is your project GitHub URL?',
     validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+    // Validate this repo exists
     default: 'https://github.com/facebook/react'
   },
 
@@ -65,6 +66,7 @@ const promptUser = () =>
       type: 'input',
       name: 'liveUrl',
       message: 'What is the URL of the live application (optional)?',
+      // Validate this does not 404
       default: 'https://www.example.com'
     },
 
@@ -88,8 +90,7 @@ const promptUser = () =>
       name: 'features',
       message: 'Enter the project Features (optional).',
       default: 'This app has features X and Y.'
-    },
-    
+    },    
 
     {
       type: 'input',
@@ -110,6 +111,7 @@ const promptUser = () =>
       name: 'emailAddress',
       message: 'For the Questions section, enter your email address.',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      // Validate is an email address
       default: 'me@example.com'
     },
 
