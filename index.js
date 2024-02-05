@@ -26,6 +26,27 @@ const targetLicenseFile = "./output/LICENSE";
 // Get the current year
 const currentYear = new Date().getFullYear();
 
+// Test if the provided url appears to be a valid GitHub url
+const isValidGitHubProjectUrl = (url) => {
+
+  const gitHubDomainUrl = "https://github.com/";
+
+  // Make sure url starts with https://github.com/
+  if (url.search(/^https\:\/\/github\.com\//) === -1){return false;}
+
+  // Remove the domain part 
+  const path = url.replace(gitHubDomainUrl, "");
+
+  // Split the path array
+  const pathArray = path.split("/");
+
+  // Check the username and repo parts exist
+  if  ((!pathArray[0]) || (!pathArray[1])){return false;}
+
+  // Valid url so return true
+  return true;
+};
+
 // Function for prompting user for contents of README
 const promptUser = () =>
   inquirer.prompt([
@@ -34,8 +55,16 @@ const promptUser = () =>
       type: 'input',
       name: 'githubURL',
       message: 'What is your project GitHub URL?',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      // Validate this repo exists
+      validate: function (value) {
+        value = value.trim();
+        if (!value) {
+          return 'This is required in order to build the README. Press CTRL+C to cancel.';
+        }
+        if (!isValidGitHubProjectUrl(value)) {
+          return 'Please enter a valid GitHub repo URL (eg https://github.com/username/repo). Press CTRL+C to cancel.';
+        }
+        return true;
+      }
     },
 
     {
