@@ -1,8 +1,10 @@
 // TODO
 /*
-  Questions (email)
+  License Badge 
+  Questions (email, GitHub username)
   Validation
   Remove table of contents for optional sections
+  List prompts: Install, Features, Usage, Tests
   Video
 */
 
