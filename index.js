@@ -1,6 +1,5 @@
 // TODO
 /*
-  License Badge 
   Questions (email, GitHub username)
   Validation
   Remove table of contents for optional sections
