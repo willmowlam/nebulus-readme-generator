@@ -108,8 +108,19 @@ const promptUser = () =>
       type: 'input',
       name: 'emailAddress',
       message: 'For the Questions section, enter your email address.',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-      // Validate is an email address
+      validate: function(value) {
+        if (!value.trim()){
+          return 'This is required in order to build the README. Press CTRL+C to cancel.';
+        }
+        // Checking for valid email using regex
+        // From https://emailregex.com/ 
+        // General Email Regex (RFC 5322 Official Standard)
+        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!regex.test(value)){
+          return 'Please enter a valid email address.';
+        }
+        return true;
+      }      
     },
 
     {
@@ -400,8 +411,14 @@ promptUser()
   // Format fields
   .then((answers) => {    
 
-    // Get gitHubSlug from provided url
+    // Get gitHubSlug and Username from provided url
     answers.githubSlug = getGitHubSlug(answers.githubURL);
+    answers.githubUsername = getGitHubUsername(answers.githubURL);
+
+    if (answers.emailAddress){
+      answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
+    }
+
     return answers;
   })
 
