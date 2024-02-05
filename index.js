@@ -353,6 +353,7 @@ return markdown;
 
 };
 
+// Return the github username and project slug from a github url
 const getGitHubSlug = (url) => {
 
   // Remove the domain part 
@@ -366,6 +367,7 @@ const getGitHubSlug = (url) => {
 
 };
 
+// Return the GitHub username from a github url
 const getGitHubUsername = (url) => {
 
   // Remove the domain part 
