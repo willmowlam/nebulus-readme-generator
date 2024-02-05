@@ -147,7 +147,8 @@ const promptUser = () =>
 
 // Function to generate markdown
 const generateMarkdown = (answers) => 
-`[![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) [![Languages](https://img.shields.io/github/languages/count/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) &nbsp;
+`[![License](https://img.shields.io/github/license/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}/blob/main/LICENSE) &nbsp;
+[![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) [![Languages](https://img.shields.io/github/languages/count/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) &nbsp;
 [![Issues](https://img.shields.io/github/issues/${answers.githubSlug}.svg?style=flat-square)](https://github.com/${answers.githubSlug}/issues) [![Pull Requests](https://img.shields.io/github/issues-pr/${answers.githubSlug}.svg?style=flat-square)](https://github.com/${answers.githubSlug}/pulls) &nbsp;
 [![Stars](https://img.shields.io/github/stars/${answers.githubSlug}.svg?style=social&label=Stars)](https://github.com/${answers.githubSlug}) [![Forks](https://img.shields.io/github/forks/${answers.githubSlug}.svg?style=social&label=Forks)](https://github.com/${answers.githubSlug})
 
