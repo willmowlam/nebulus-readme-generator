@@ -94,8 +94,8 @@ const promptUser = () =>
 
     {
       type: 'input',
-      name: 'contribution',
-      message: 'Please provide Contribution guidelines (optional).',
+      name: 'contributing',
+      message: 'Please provide Contributing guidelines (optional).',
     },
 
     {
@@ -206,9 +206,9 @@ if (answers.features){
   markdown += `${i}. [Features](#features)\n`;
 }
 
-if (answers.contribution){
+if (answers.contributing){
   i++
-  markdown += `${i}. [How to Contribute](#contribution)\n`;
+  markdown += `${i}. [Contributing](#contributing)\n`;
 }
 
 if (answers.tests){
@@ -285,13 +285,13 @@ if (answers.features) {
 ${answers.features}
 `}
 
-// Add markdown for Contribution
-if (answers.contribution) {
+// Add markdown for Contributing
+if (answers.contributing) {
   markdown += 
 `
-## Contribution
+## Contributing
 
-${answers.contribution}
+${answers.contributing}
 `}
 
 // Add markdown for Tests
