@@ -48,7 +48,7 @@ const promptUser = () =>
     {
       type: 'input',
       name: 'description',
-      message: 'Provide a short Description explaining the project; eg what was the motivation, what problem does it solve?',
+      message: 'Provide a short Description explaining your project.',
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
     },
 
