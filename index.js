@@ -1,7 +1,5 @@
 // TODO
 /*
-  Questions (email, GitHub username)
-  Validation
   List prompts: Install, Features, Usage, Tests
   Video
 */
@@ -99,14 +97,12 @@ const promptUser = () =>
       type: 'input',
       name: 'liveUrl',
       message: 'What is the URL of the live application (optional)?',
-      // Validate, if provided this does not 404
     },
 
     {
       type: 'input',
       name: 'screenshotUrl',
       message: 'Provide the local path or URL to a Screenshot of the application (optional)',
-      // Validate, if provided the screenshot file exists?
     },
 
     {
