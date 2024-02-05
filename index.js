@@ -2,7 +2,6 @@
 /*
   Questions (email, GitHub username)
   Validation
-  Remove table of contents for optional sections
   List prompts: Install, Features, Usage, Tests
   Video
 */
@@ -145,7 +144,9 @@ const promptUser = () =>
 
 
 // Function to generate markdown
-const generateMarkdown = (answers) => 
+const generateMarkdown = (answers) => {
+
+markdown =
 `[![License](https://img.shields.io/github/license/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}/blob/main/LICENSE) &nbsp;
 [![Language](https://img.shields.io/github/languages/top/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) [![Languages](https://img.shields.io/github/languages/count/${answers.githubSlug}?style=flat-square)](https://github.com/${answers.githubSlug}) &nbsp;
 [![Issues](https://img.shields.io/github/issues/${answers.githubSlug}.svg?style=flat-square)](https://github.com/${answers.githubSlug}/issues) [![Pull Requests](https://img.shields.io/github/issues-pr/${answers.githubSlug}.svg?style=flat-square)](https://github.com/${answers.githubSlug}/pulls) &nbsp;
@@ -158,66 +159,163 @@ const generateMarkdown = (answers) =>
 ${answers.description}
 
 ## Table of Contents
+`;
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Demo](#demo)
-4. [Screenshot](#screenshot)
-5. [Credits](#credits)
-6. [Features](#features)
-7. [How to Contribute](#contribution)
-8. [Tests](#tests)
-9. [Questions](#questions)
-10. [License](#license)
+// Add markdown for Table of Contents
 
+let i = 0;
+
+if (answers.installation) {
+  i++;
+  markdown += `${i}. [Installation](#installation)\n`;
+}
+
+if (answers.usage){
+  i++;
+  markdown +=  `${i}. [Usage](#usage)\n`;
+}
+
+if (answers.liveUrl){
+  i++
+  markdown += `${i}. [Demo](#demo)\n`;
+}
+
+if (answers.screenshotUrl){
+  i++
+  markdown += `${i}. [Screenshot](#screenshot)\n`;
+}
+
+if (answers.credits){
+  i++
+  markdown += `${i}. [Credits](#credits)\n`;
+}
+
+if (answers.features){
+  i++
+  markdown += `${i}. [Features](#features)\n`;
+}
+
+if (answers.contribution){
+  i++
+  markdown += `${i}. [How to Contribute](#contribution)\n`;
+}
+
+if (answers.tests){
+  i++
+  markdown += `${i}. [Tests](#tests)\n`;
+}
+
+if (answers.questions){
+  i++
+  markdown += `${i}. [Questions](#questions)\n`;
+}
+
+if (answers.license){
+  i++
+  markdown += `${i}. [License](#license)\n`;
+}
+
+// Add markdown for Installation
+if (answers.installation) {
+  markdown += 
+`
 ## Installation
 
 To install necessary dependencies, run the following command(s) in your terminal:
 \`\`\`jsx
 ${answers.installation}
 \`\`\`
+`}
 
+// Add markdown for Usage
+if (answers.usage) {
+  markdown += 
+`
 ## Usage
 
 ${answers.usage}
+`}
 
+// Add markdown for Demo
+if (answers.liveUrl) {
+  markdown += 
+`
 ## Demo
 
 Use the following link to view a live demo of this application: 
 
 [Live Demo](${answers.liveUrl})
+`}
 
+// Add markdown for Screenshot
+if (answers.screenshotUrl) {
+  markdown += 
+`
 ## Screenshot
 
 ![Screenshot of Application](${answers.screenshotUrl})
+`}
 
+// Add markdown for Credits
+if (answers.credits) {
+  markdown += 
+`
 ## Credits
 
 This project was developed by ${answers.credits}.
+`}
 
+// Add markdown for Features
+if (answers.features) {
+  markdown += 
+`
 ## Features
 
 ${answers.features}
+`}
 
+// Add markdown for Contribution
+if (answers.contribution) {
+  markdown += 
+`
 ## Contribution
 
 ${answers.contribution}
+`}
 
+// Add markdown for Tests
+if (answers.tests) {
+  markdown += 
+`
 ## Tests
 
 ${answers.tests}
+`}
 
+// Add markdown for Questions
+if (answers.questions) {
+  markdown += 
+`
 ## Questions
 
 ${answers.questions}
+`}
 
+// Add markdown for License
+if (answers.license) {
+  markdown += 
+`
 ## License
 
 Copyright (c) ${currentYear} ${answers.legalName}
 
 ${answers.title} is [${answers.license} licensed](./LICENSE).
 
-`;
+`}
+
+return markdown;
+
+};
 
 const getGitHubSlug = (url) => {
 
