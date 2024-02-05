@@ -296,19 +296,8 @@ const getLicenseText = (answers, template) => {
 
 // Call the prompt function to gather user input, format then asynchronously write the README and LICENSE files using promisify.
 promptUser()
-
-  // Get license template
-  .then(async (answers) => {
-    const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
-    return {answers, licenseTemplate};
-  })
   
-  // Get the license
-  .then(( {answers, licenseTemplate} ) => {
-    return getLicenseText(answers, licenseTemplate);
-  })
-  
-  // Format other fields
+  // Format fields
   .then((answers) => {    
 
     // Get gitHubSlug from provided url
@@ -319,9 +308,15 @@ promptUser()
   // Write README and LICENSE files
   .then(async (answers) => {
 
+    // Get license template and customise the license text
+    const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
+    answers = getLicenseText(answers, licenseTemplate);
+
+    // Write LICENSE file
     await writeFileAsync(targetLicenseFile, answers.licenseText);
     console.log(`Successfully wrote to ${targetLicenseFile}`);
 
+    // Write README.md
     await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
     console.log(`Successfully wrote to ${targetReadmeFile}`);
   })
