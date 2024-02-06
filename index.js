@@ -168,13 +168,33 @@ const promptUser = async () => {
       name: 'credits',
       message: 'Enter any Credits (optional).',
     },
+
+    {
+      type: 'confirm',
+      name: 'includeFeaturesList',
+      message: 'Would you like to include a multiple features list? Press CTRL+C to cancel.',
+      default: false,
+    }
+  ]))};
     
+    // Ask if the user wants a Features list
+    if (answers.includeFeaturesList) {
+      // Add installation steps
+      const arrayFeatures = await arrayPrompt(answers.features, "Enter the next feature or enter to end");
+      answers.features = arrayFeatures;
+    }else{
+      // Add single feature text 
+      answers = { ...answers, ...(await inquirer.prompt([
     {
       type: 'input',
       name: 'features',
       message: 'Enter the project Features (optional).',
-    },    
+    },
+  ]))};
+  }
 
+  // Continue building answers to questions
+  answers = { ...answers, ...(await inquirer.prompt([
     {
       type: 'input',
       name: 'contributing',
@@ -378,8 +398,19 @@ if (answers.features) {
 `
 ## Features
 
-${answers.features}
-`}
+`;
+
+  // Check if this is a features list
+  if (!Array.isArray(answers.features)){
+    markdown += answers.features + '\n';
+  }else{
+    // Create list of features
+    for (let i = 0; i < answers.features.length; i++) {
+      const step = answers.features[i];
+      markdown += `- ${step}\n`;   
+    }
+  }
+}
 
 // Add markdown for Contributing
 if (answers.contributing) {
