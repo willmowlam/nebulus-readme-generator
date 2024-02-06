@@ -45,6 +45,57 @@ const isValidGitHubProjectUrl = (url) => {
   return true;
 };
 
+// Function for repeat prompt
+// Take object (eg answers.installation) and display a question to generate an array of answers (ie answers.installation[n])
+// Usage: await arrayPrompt(answers.installation, "Enter the next installation step or enter to end")
+const arrayPrompt = async function (obj, question){
+
+  // Ask prompt
+  const ask = async () => {
+    const { answer } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'answer',
+        message: question,
+      }
+    ]);
+
+    // Save answer
+    if (answer.trim() !== '' ){
+      obj.push(answer);
+      // Ask again
+      await ask();
+    }
+  };
+
+  // Ask again
+  await ask();
+
+  // Return array of obj
+  return obj;
+}
+
+const mainTest = async () => {
+  const answers = { installation: [] };
+  const {includeInstallation} = await inquirer.prompt([    
+    {
+      type: 'confirm',
+      name: 'includeInstallation',
+      message: 'Would you like to include installation steps?',
+      default: false
+    },
+  ])
+
+  if (includeInstallation){
+    await arrayPrompt(answers.installation, "Enter the next installation step or enter to end");
+  }
+  
+  console.log('Installation instructions:', answers.installation);
+
+};
+
+mainTest();
+
 // Function for prompting user for contents of README
 const promptUser = () =>
   inquirer.prompt([
@@ -433,37 +484,37 @@ const getLicenseText = (answers, template) => {
 }
 
 // Call the prompt function to gather user input, format then asynchronously write the README and LICENSE files using promisify.
-promptUser()
+// promptUser()
   
-  // Format fields
-  .then((answers) => {    
+//   // Format fields
+//   .then((answers) => {    
 
-    // Get gitHubSlug and Username from provided url
-    answers.githubSlug = getGitHubSlug(answers.githubURL);
-    answers.githubUsername = getGitHubUsername(answers.githubURL);
+//     // Get gitHubSlug and Username from provided url
+//     answers.githubSlug = getGitHubSlug(answers.githubURL);
+//     answers.githubUsername = getGitHubUsername(answers.githubURL);
 
-    if (answers.emailAddress){
-      answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
-    }
+//     if (answers.emailAddress){
+//       answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
+//     }
 
-    return answers;
-  })
+//     return answers;
+//   })
 
-  // Write README and LICENSE files
-  .then(async (answers) => {
+//   // Write README and LICENSE files
+//   .then(async (answers) => {
 
-    // Get license template and customise the license text
-    const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
-    answers = getLicenseText(answers, licenseTemplate);
+//     // Get license template and customise the license text
+//     const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
+//     answers = getLicenseText(answers, licenseTemplate);
 
-    // Write LICENSE file
-    await writeFileAsync(targetLicenseFile, answers.licenseText);
-    console.log(`Successfully wrote to ${targetLicenseFile}`);
+//     // Write LICENSE file
+//     await writeFileAsync(targetLicenseFile, answers.licenseText);
+//     console.log(`Successfully wrote to ${targetLicenseFile}`);
 
-    // Write README.md
-    await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
-    console.log(`Successfully wrote to ${targetReadmeFile}`);
-  })
+//     // Write README.md
+//     await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
+//     console.log(`Successfully wrote to ${targetReadmeFile}`);
+//   })
 
-  // Catch errors and write to console
-  .catch((err)=> console.error(err));
+//   // Catch errors and write to console
+//   .catch((err)=> console.error(err));
