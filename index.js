@@ -369,7 +369,7 @@ if (answers.credits) {
 `
 ## Credits
 
-This project was developed by ${answers.credits}.
+${answers.credits}
 `}
 
 // Add markdown for Features
