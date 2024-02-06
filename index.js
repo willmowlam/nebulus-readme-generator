@@ -96,7 +96,7 @@ const promptUser = async () => {
           return 'This is required in order to build the README.';
         }
         if (!isValidGitHubProjectUrl(value)) {
-          return 'Please enter a valid GitHub repo URL (eg https://github.com/username/repo). Press CTRL+C to cancel.';
+          return 'Please enter a valid GitHub repo URL (eg https://github.com/username/repo).';
         }
         return true;
       }
@@ -106,20 +106,20 @@ const promptUser = async () => {
       type: 'input',
       name: 'title',
       message: 'What is your project Title?',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      validate: value => value.trim() ? true : 'This is required in order to build the README.',
     },
 
     {
       type: 'input',
       name: 'description',
       message: 'Provide a short Description explaining your project.',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      validate: value => value.trim() ? true : 'This is required in order to build the README.',
     },
 
     {
       type: 'confirm',
       name: 'includeInstallationSteps',
-      message: 'Would you like to include Installation steps? Press CTRL+C to cancel.',
+      message: 'Would you like to include Installation steps?',
       default: false,
     }
   ]);
@@ -136,7 +136,7 @@ const promptUser = async () => {
         type: 'input',
         name: 'installation',
         message: 'What are the Installation instructions?',
-        validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+        validate: value => value.trim() ? true : 'This is required in order to build the README.',
       }
     ]))};
   }
@@ -148,7 +148,7 @@ const promptUser = async () => {
       type: 'input',
       name: 'usage',
       message: 'What are the Usage instructions?',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      validate: value => value.trim() ? true : 'This is required in order to build the README.',
     },
 
     {
@@ -172,7 +172,7 @@ const promptUser = async () => {
     {
       type: 'confirm',
       name: 'includeFeaturesList',
-      message: 'Would you like to include a Features list? Press CTRL+C to cancel.',
+      message: 'Would you like to include a Features list?',
       default: false,
     }
   ]))};
@@ -213,7 +213,7 @@ const promptUser = async () => {
       message: 'For the Questions section, enter your email address.',
       validate: function(value) {
         if (!value.trim()){
-          return 'This is required in order to build the README. Press CTRL+C to cancel.';
+          return 'This is required in order to build the README.';
         }
         // Checking for valid email using regex
         // From https://emailregex.com/ 
@@ -244,14 +244,14 @@ const promptUser = async () => {
           value: 'GPL-3.0',
         },
       ],
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      validate: value => value.trim() ? true : 'This is required in order to build the README.',
     },
 
     {
       type: 'input',
       name: 'legalName',
       message: 'What is your Legal Name, to be shown on the License?',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      validate: value => value.trim() ? true : 'This is required in order to build the README.',
     },
 
   ]))};
