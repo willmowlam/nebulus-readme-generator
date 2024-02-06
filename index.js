@@ -50,6 +50,11 @@ const isValidGitHubProjectUrl = (url) => {
 // Usage: await arrayPrompt(answers.installation, "Enter the next installation step or enter to end")
 const arrayPrompt = async function (obj, question){
 
+  // Convert obj to an array if necessary
+  if (!Array.isArray(obj)) {
+    obj = [];
+  }
+
   // Ask prompt
   const ask = async () => {
     const { answer } = await inquirer.prompt([
@@ -75,31 +80,11 @@ const arrayPrompt = async function (obj, question){
   return obj;
 }
 
-const mainTest = async () => {
-  const answers = { installation: [] };
-  const {includeInstallation} = await inquirer.prompt([    
-    {
-      type: 'confirm',
-      name: 'includeInstallation',
-      message: 'Would you like to include installation steps?',
-      default: false
-    },
-  ])
-
-  if (includeInstallation){
-    await arrayPrompt(answers.installation, "Enter the next installation step or enter to end");
-  }
-  
-  console.log('Installation instructions:', answers.installation);
-
-};
-
-// mainTest();
 
 // Function for prompting user for contents of README
 const promptUser = async () => {
 
-  const answers = await inquirer.prompt([
+  let answers = await inquirer.prompt([
 
     {
       type: 'input',
@@ -108,7 +93,7 @@ const promptUser = async () => {
       validate: function (value) {
         value = value.trim();
         if (!value) {
-          return 'This is required in order to build the README. Press CTRL+C to cancel.';
+          return 'This is required in order to build the README.';
         }
         if (!isValidGitHubProjectUrl(value)) {
           return 'Please enter a valid GitHub repo URL (eg https://github.com/username/repo). Press CTRL+C to cancel.';
@@ -132,11 +117,32 @@ const promptUser = async () => {
     },
 
     {
-      type: 'input',
-      name: 'installation',
-      message: 'What are the Installation instructions?',
-      validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
-    },
+      type: 'confirm',
+      name: 'includeInstallationSteps',
+      message: 'Would you like to include installation steps? Press CTRL+C to cancel.',
+      default: false,
+    }
+  ]);
+
+  // Ask if the user wants multistep installation instructions
+  if (answers.includeInstallationSteps) {
+    // Add installation steps
+    const arraySteps = await arrayPrompt(answers.installation, "Enter the next installation step or enter to end");
+    answers.installation = arraySteps;
+  }else{
+    // Add single installation text 
+    answers = { ...answers, ...(await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'installation',
+        message: 'What are the Installation instructions?',
+        validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
+      }
+    ]))};
+  }
+
+  // Continue building answers to questions
+  answers = { ...answers, ...(await inquirer.prompt([
 
     {
       type: 'input',
@@ -228,7 +234,7 @@ const promptUser = async () => {
       validate: value => value.trim() ? true : 'This is required in order to build the README. Press CTRL+C to cancel.',
     },
 
-  ]);
+  ]))};
 
   return answers;
 };
@@ -309,14 +315,24 @@ if (answers.license){
 // Add markdown for Installation
 if (answers.installation) {
   markdown += 
-`
-## Installation
+  `
+  ## Installation
 
-To install necessary dependencies, run the following command(s) in your terminal:
-\`\`\`jsx
-${answers.installation}
-\`\`\`
-`}
+  `;
+
+  // Check if this is a multi-step installation instruction
+  if (!Array.isArray(answers.installation)){
+    markdown += answers.installation + '\n';
+  }else{
+    markdown += `To install, run the following command(s) in your terminal:\n\n`;
+    markdown += `\`\`\`\n`;
+    for (let i = 0; i < answers.installation.length; i++) {
+      const step = answers.installation[i];
+      markdown += `${step}\n`;   
+    }
+    markdown += `\`\`\`\n`;
+  }
+}
 
 // Add markdown for Usage
 if (answers.usage) {
