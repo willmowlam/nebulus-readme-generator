@@ -119,7 +119,7 @@ const promptUser = async () => {
     {
       type: 'confirm',
       name: 'includeInstallationSteps',
-      message: 'Would you like to include installation steps? Press CTRL+C to cancel.',
+      message: 'Would you like to include Installation steps? Press CTRL+C to cancel.',
       default: false,
     }
   ]);
@@ -127,7 +127,7 @@ const promptUser = async () => {
   // Ask if the user wants multistep installation instructions
   if (answers.includeInstallationSteps) {
     // Add installation steps
-    const arraySteps = await arrayPrompt(answers.installation, "Enter the next installation step or enter to end");
+    const arraySteps = await arrayPrompt(answers.installation, "Enter the next Installation step or press enter to end.");
     answers.installation = arraySteps;
   }else{
     // Add single installation text 
@@ -160,7 +160,7 @@ const promptUser = async () => {
     {
       type: 'input',
       name: 'screenshotUrl',
-      message: 'Provide the local path or URL to a Screenshot of the application (optional)',
+      message: 'Provide the local path or URL to a Screenshot of the application (optional).',
     },
 
     {
@@ -172,7 +172,7 @@ const promptUser = async () => {
     {
       type: 'confirm',
       name: 'includeFeaturesList',
-      message: 'Would you like to include a multiple features list? Press CTRL+C to cancel.',
+      message: 'Would you like to include a Features list? Press CTRL+C to cancel.',
       default: false,
     }
   ]))};
@@ -180,7 +180,7 @@ const promptUser = async () => {
     // Ask if the user wants a Features list
     if (answers.includeFeaturesList) {
       // Add installation steps
-      const arrayFeatures = await arrayPrompt(answers.features, "Enter the next feature or enter to end");
+      const arrayFeatures = await arrayPrompt(answers.features, "Enter the next Feature or press enter to end.");
       answers.features = arrayFeatures;
     }else{
       // Add single feature text 
