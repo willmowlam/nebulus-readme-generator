@@ -132,3 +132,6 @@ dist
 # Output files
 output/LICENSE
 output/README.md
+
+# MacOS folder and meta data
+.DS_Store/
