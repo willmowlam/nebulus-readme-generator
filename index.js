@@ -94,11 +94,12 @@ const mainTest = async () => {
 
 };
 
-mainTest();
+// mainTest();
 
 // Function for prompting user for contents of README
-const promptUser = () =>
-  inquirer.prompt([
+const promptUser = async () => {
+
+  const answers = await inquirer.prompt([
 
     {
       type: 'input',
@@ -228,6 +229,9 @@ const promptUser = () =>
     },
 
   ]);
+
+  return answers;
+};
 
 
 // Function to generate markdown
@@ -484,37 +488,37 @@ const getLicenseText = (answers, template) => {
 }
 
 // Call the prompt function to gather user input, format then asynchronously write the README and LICENSE files using promisify.
-// promptUser()
+promptUser()
   
-//   // Format fields
-//   .then((answers) => {    
+  // Format fields
+  .then((answers) => {    
 
-//     // Get gitHubSlug and Username from provided url
-//     answers.githubSlug = getGitHubSlug(answers.githubURL);
-//     answers.githubUsername = getGitHubUsername(answers.githubURL);
+    // Get gitHubSlug and Username from provided url
+    answers.githubSlug = getGitHubSlug(answers.githubURL);
+    answers.githubUsername = getGitHubUsername(answers.githubURL);
 
-//     if (answers.emailAddress){
-//       answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
-//     }
+    if (answers.emailAddress){
+      answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
+    }
 
-//     return answers;
-//   })
+    return answers;
+  })
 
-//   // Write README and LICENSE files
-//   .then(async (answers) => {
+  // Write README and LICENSE files
+  .then(async (answers) => {
 
-//     // Get license template and customise the license text
-//     const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
-//     answers = getLicenseText(answers, licenseTemplate);
+    // Get license template and customise the license text
+    const licenseTemplate = await readFileAsync(`./assets/licenses/${answers.license}`, 'utf8');
+    answers = getLicenseText(answers, licenseTemplate);
 
-//     // Write LICENSE file
-//     await writeFileAsync(targetLicenseFile, answers.licenseText);
-//     console.log(`Successfully wrote to ${targetLicenseFile}`);
+    // Write LICENSE file
+    await writeFileAsync(targetLicenseFile, answers.licenseText);
+    console.log(`Successfully wrote to ${targetLicenseFile}`);
 
-//     // Write README.md
-//     await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
-//     console.log(`Successfully wrote to ${targetReadmeFile}`);
-//   })
+    // Write README.md
+    await writeFileAsync(targetReadmeFile, generateMarkdown(answers));
+    console.log(`Successfully wrote to ${targetReadmeFile}`);
+  })
 
-//   // Catch errors and write to console
-//   .catch((err)=> console.error(err));
+  // Catch errors and write to console
+  .catch((err)=> console.error(err));
