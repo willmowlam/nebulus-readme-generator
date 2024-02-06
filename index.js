@@ -1,8 +1,3 @@
-// TODO
-/*
-  List prompts: Features, 
-  Video
-*/
 
 // Import required modules (fs, inquirer, util)
 const fs = require('fs');
