@@ -1,6 +1,6 @@
 // TODO
 /*
-  List prompts: Install, Features, Usage, Tests
+  List prompts: Features, 
   Video
 */
 
