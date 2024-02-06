@@ -42,8 +42,8 @@ Email RegEx validation by [emailregex.com](https://emailregex.com/) and badges b
 - Creates a README.md file by asking questions about your project.
 - Creates a LICENSE file from three common license templates.
 - Adds dynamic badges for License, Language, Issues, Pull Requests, Stars and Forks.
-- Generate step-by-step installation instructions.
-- Generate a features list.
+- Generates step-by-step installation instructions.
+- Generates a features list.
 
 ## Contributing
 
