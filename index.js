@@ -1,5 +1,4 @@
-
-// Import required modules (fs, inquirer, util)
+// Import required modules
 const fs = require('fs');
 const inquirer = require('inquirer');
 const util = require('util');
@@ -36,7 +35,7 @@ const isValidGitHubProjectUrl = (url) => {
   // Check the username and repo parts exist
   if  ((!pathArray[0]) || (!pathArray[1])){return false;}
 
-  // Valid url so return true
+  // Valid url
   return true;
 };
 
@@ -50,7 +49,7 @@ const arrayPrompt = async function (obj, question){
     obj = [];
   }
 
-  // Ask prompt
+  // Async function to ask user for answers
   const ask = async () => {
     const { answer } = await inquirer.prompt([
       {
@@ -60,7 +59,7 @@ const arrayPrompt = async function (obj, question){
       }
     ]);
 
-    // Save answer
+    // Save answer if not empty (which happens when they hit the enter key to finish)
     if (answer.trim() !== '' ){
       obj.push(answer);
       // Ask again
@@ -68,13 +67,12 @@ const arrayPrompt = async function (obj, question){
     }
   };
 
-  // Ask again
+  // Start asking questions
   await ask();
 
   // Return array of obj
   return obj;
 }
-
 
 // Function for prompting user for contents of README
 const promptUser = async () => {
@@ -121,11 +119,11 @@ const promptUser = async () => {
 
   // Ask if the user wants multistep installation instructions
   if (answers.includeInstallationSteps) {
-    // Add installation steps
+    // Ask for installation steps and save array to answers
     const arraySteps = await arrayPrompt(answers.installation, "Enter the next Installation step or press enter to end.");
     answers.installation = arraySteps;
   }else{
-    // Add single installation text 
+    // Ask for installation text
     answers = { ...answers, ...(await inquirer.prompt([
       {
         type: 'input',
@@ -174,11 +172,11 @@ const promptUser = async () => {
     
     // Ask if the user wants a Features list
     if (answers.includeFeaturesList) {
-      // Add installation steps
+      // Ask for feature items and save array to answers
       const arrayFeatures = await arrayPrompt(answers.features, "Enter the next Feature or press enter to end.");
       answers.features = arrayFeatures;
     }else{
-      // Add single feature text 
+      // Ask for a single feature 
       answers = { ...answers, ...(await inquirer.prompt([
     {
       type: 'input',
@@ -330,10 +328,10 @@ if (answers.license){
 // Add markdown for Installation
 if (answers.installation) {
   markdown += 
-  `
-  ## Installation
+`
+## Installation
 
-  `;
+`;
 
   // Check if this is a multi-step installation instruction
   if (!Array.isArray(answers.installation)){
@@ -491,7 +489,7 @@ const getLicenseText = (answers, template) => {
 
   switch (answers.license){
     case "MIT":
-      // Update placeholder for current year   
+      // Update placeholder for current year
       licenseText = licenseText.replace(/\[year\]/g, `${currentYear}`);
 
       // Update placeholder for the legal owner
@@ -499,7 +497,7 @@ const getLicenseText = (answers, template) => {
 
       break;
     case "Apache-2.0":
-      // Update placeholder for current year  
+      // Update placeholder for current year
       licenseText = licenseText.replace(/\[yyyy\]/g, `${currentYear}`);
 
       // Update placeholder for the legal owner
@@ -508,16 +506,16 @@ const getLicenseText = (answers, template) => {
       break;
 
     case 'GPL-3.0':
-      // Update placeholder for current year   
+      // Update placeholder for current year
       licenseText = licenseText.replace(/<year>/g, `${currentYear}`);
 
-      // Update placeholder for current year   
+      // Change program name to project title
       licenseText = licenseText.replace(/<program>/g, `${answers.title}`);
         
       // Update placeholder for the legal owner
       licenseText = licenseText.replace(/<name of author>/g, `${answers.legalName}`);
 
-      // Change program name to project title
+      // Update placeholder for the project description [todo: add project name/title before description]
       licenseText = licenseText.replace(/<one line to give the program\'s name and a brief idea of what it does.>/g,  `${answers.description}`);
       
       break;
@@ -535,10 +533,11 @@ promptUser()
   // Format fields
   .then((answers) => {    
 
-    // Get gitHubSlug and Username from provided url
+    // Get gitHubSlug and Username from provided url [could be moved to the top of generateMarkdown()]
     answers.githubSlug = getGitHubSlug(answers.githubURL);
     answers.githubUsername = getGitHubUsername(answers.githubURL);
 
+    // Create questions section if email provided [could be moved to generateMarkdown()]
     if (answers.emailAddress){
       answers.questions = `If you have any questions, please email [${answers.emailAddress}](mailto:${answers.emailAddress}) or visit my GitHub profile at [https://github.com/${answers.githubUsername}](https://github.com/${answers.githubUsername})`;
     }
