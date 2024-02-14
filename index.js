@@ -264,8 +264,6 @@ markdown =
 
 # ${answers.title}
 
-## Description
-
 ${answers.description}
 
 ## Table of Contents
