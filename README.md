@@ -5,8 +5,6 @@
 
 # Readme Generator
 
-## Description
-
 A command line Node.js powered README.md generator for GitHub projects.
 
 ## Table of Contents
@@ -15,9 +13,8 @@ A command line Node.js powered README.md generator for GitHub projects.
 3. [Credits](#credits)
 4. [Features](#features)
 5. [Contributing](#contributing)
-6. [Tests](#tests)
-7. [Questions](#questions)
-8. [License](#license)
+6. [Questions](#questions)
+7. [License](#license)
 
   ## Installation
 
@@ -49,10 +46,6 @@ Email RegEx validation by [emailregex.com](https://emailregex.com/) and badges b
 
 This project is open source! Feel free to open an [Issue](https://github.com/willmowlam/nebulus-readme-generator/issues) or submit a [Pull Request](https://github.com/willmowlam/nebulus-readme-generator/pulls).
 
-## Tests
-
-n/a
-
 ## Questions
 
 If you have any questions, please email [willmowlam.510@icloud.com](mailto:willmowlam.510@icloud.com) or visit my GitHub profile at [https://github.com/willmowlam](https://github.com/willmowlam)
@@ -62,4 +55,3 @@ If you have any questions, please email [willmowlam.510@icloud.com](mailto:willm
 Copyright (c) 2024 Will Mowlam
 
 Readme Generator is [MIT licensed](./LICENSE).
-
